@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
 
 const Person = ({ person }) => {
   return (
@@ -60,7 +62,17 @@ const App = () => {
   const [newName, setNewName] = useState('a new name...')
   const [newNumber, setNewNumber] = useState('a new number...')
   const [filterdPerson, setFilteredPerson] = useState('')
-  const [showFiltered, setShowFilter] = useState('')
+
+  useEffect(() => {
+    console.log('effect')
+    axios
+      .get('http://localhost:3001/persons')
+      .then(response => {
+        console.log('promise fulfilled')
+        setPersons(response.data)
+
+})
+  }, [])
 
   const addName = (event) => {
     event.preventDefault()
@@ -94,22 +106,20 @@ const App = () => {
 
 
   const matchingPersons = persons.filter(person => person.name.toLowerCase().includes(filterdPerson.toLowerCase()))
-  const personsToShow = showFiltered
-    ? persons
-    : matchingPersons
+
 
 
   return (
     <div>
       <h2>Phonebook</h2>
       <Filter filterdPerson={filterdPerson} handleChange={handleFilterChange}
-        setFilter={() => setShowFilter} />
+        />
       <h2>add a new</h2>
       <Form addName={addName} nameChange={handleNameChange} numberChange={handleNumberChange} />
       <h2>Numbers</h2>
 
       <ul id="persons-list">
-        {personsToShow.map(person =>
+        {matchingPersons.map(person =>
           <Person key={person.id} person={person} />
         )}
       </ul>
