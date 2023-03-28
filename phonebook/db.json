@@ -16,14 +16,19 @@
       "id": 3
     },
     {
-      "name": "Dan the man",
-      "number": "1",
+      "name": "Efren Reyes",
+      "number": "234 456 6789",
       "id": 4
     },
     {
-      "name": "afafs",
-      "number": "121",
+      "name": "Gringo Tito",
+      "number": "786 453 7768",
       "id": 5
+    },
+    {
+      "name": "Bob Ross",
+      "number": "2345 8972",
+      "id": 6
     }
   ]
 }
